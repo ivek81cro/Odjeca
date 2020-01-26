@@ -84,7 +84,7 @@
     </div>
 </form>
 
-@section Scripts{ 
+@section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
             getSubCategory();
@@ -92,7 +92,7 @@
                 getSubCategory();
             });
         });
-    
+
         function getSubCategory() {
             var url = '@Url.Content("~/")' + "Admin/SubCategory/GetSubCategory";
             var ddlsource = '#CategoryId';
@@ -102,14 +102,12 @@
                 $.each(data, function (i, subcategory) {
                     items += "<option value='" + subcategory.value + "'>" + subcategory.text + "</option>";
                 });
-    
+
                 $('#SubCategoryId').html(items);
             })
-            
+
         }
     </script>
-    
-    @{ 
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
