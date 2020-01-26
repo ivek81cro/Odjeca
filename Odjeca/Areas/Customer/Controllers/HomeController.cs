@@ -4,24 +4,39 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Odjeca.Data;
 using Odjeca.Models;
+using Odjeca.Models.ViewModels;
 
 namespace Odjeca.Controllers
 {
     [Area("Customer")]
     public class HomeController : Controller
     {
+        private readonly ApplicationDbContext _db;
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        
+        public HomeController(ApplicationDbContext db)
         {
-            _logger = logger;
+            _db = db;
         }
 
-        public IActionResult Index()
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
+
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IndexViewModel IndexVM = new IndexViewModel()
+            {
+                StoreItem = await _db.StoreItem.Include(m => m.Category).Include(m => m.SubCategory).ToListAsync(),
+                Category = await _db.Category.ToListAsync(),
+                Discount = await _db.Discount.Where(c => c.IsActive == true).ToListAsync()
+            };
+            return View(IndexVM);
         }
 
         public IActionResult Privacy()
