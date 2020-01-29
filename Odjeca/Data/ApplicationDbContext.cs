@@ -18,5 +18,6 @@ namespace Odjeca.Data
         public DbSet<SubCategory> SubCategory { get; set; }
         public DbSet<StoreItem> StoreItem { get; set; }
         public DbSet<Discount> Discount { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
 }
