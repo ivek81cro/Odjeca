@@ -19,5 +19,6 @@ namespace Odjeca.Data
         public DbSet<StoreItem> StoreItem { get; set; }
         public DbSet<Discount> Discount { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<ShoppingCart> ShoppingCart { get; set; }
     }
 }
