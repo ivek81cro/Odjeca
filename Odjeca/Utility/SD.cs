@@ -12,5 +12,7 @@ namespace Odjeca.Utility
         public const string StorageUser = "StorageUser";
         public const string FrontDeskUser = "FrontDesk";
         public const string CustomerEndUser = "Customer";
+
+        public const string ssShoppingCartCount = "ssCartcount";
     }
 }

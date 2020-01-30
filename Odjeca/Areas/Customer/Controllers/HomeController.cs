@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Odjeca.Data;
 using Odjeca.Models;
 using Odjeca.Models.ViewModels;
+using Odjeca.Utility;
 
 namespace Odjeca.Controllers
 {
@@ -39,6 +40,16 @@ namespace Odjeca.Controllers
                 Category = await _db.Category.ToListAsync(),
                 Discount = await _db.Discount.Where(c => c.IsActive == true).ToListAsync()
             };
+
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (claim != null)
+            {
+                var cnt = _db.ShoppingCart.Where(u => u.ApplicationUserId == claim.Value).ToList().Count;
+                HttpContext.Session.SetInt32(SD.ssShoppingCartCount, cnt);
+            }
+
             return View(IndexVM);
         }
 
@@ -93,7 +104,7 @@ namespace Odjeca.Controllers
                 await _db.SaveChangesAsync();
 
                 var count = _db.ShoppingCart.Where(c => c.ApplicationUserId == cartObject.ApplicationUserId).ToList().Count();
-                HttpContext.Session.SetInt32("ssCartCount", count);
+                HttpContext.Session.SetInt32(SD.ssShoppingCartCount, count);
 
                 return RedirectToAction("Index");
             }
