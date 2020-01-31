@@ -167,8 +167,8 @@ namespace Odjeca.Areas.Customer.Controllers
             HttpContext.Session.SetInt32(SD.ssShoppingCartCount, 0);
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("Index", "Home");
-            //return RedirectToAction("Confirm", "Order", new { id = detailCart.OrderHeader.Id);
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("Confirm", "Order", new { id = detailCart.OrderHeader.Id });
 
         }
 
