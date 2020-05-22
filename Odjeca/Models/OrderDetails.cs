@@ -21,7 +21,7 @@ namespace Odjeca.Models
         [Required]
         public int StoreItemId { get; set; }
 
-        [ForeignKey("MenuItemId")]
+        [ForeignKey("StoreItemId")]
         public virtual StoreItem StoreItem { get; set; }
 
         public int Count { get; set; }
