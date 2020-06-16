@@ -26,10 +26,8 @@ namespace Odjeca.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            StoreViewModel IndexVM = new StoreViewModel()
+            StoreViewModel StoreVM = new StoreViewModel()
             {
-                StoreItem = await _db.StoreItem.Include(m => m.Category).Include(m => m.SubCategory).ToListAsync(),
-                Category = await _db.Category.ToListAsync(),
                 Discount = await _db.Discount.Where(c => c.IsActive == true).ToListAsync()
             };
 
@@ -41,7 +39,7 @@ namespace Odjeca.Controllers
                 var cnt = _db.ShoppingCart.Where(u => u.ApplicationUserId == claim.Value).ToList().Count;
                 HttpContext.Session.SetInt32(SD.ssShoppingCartCount, cnt);
             }
-            return View(IndexVM);
+            return View(StoreVM);
         }
         public IActionResult Privacy()
         {

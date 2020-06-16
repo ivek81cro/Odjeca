@@ -27,8 +27,7 @@ namespace Odjeca.Areas.Customer.Controllers
             StoreViewModel StoreVM = new StoreViewModel()
             {
                 StoreItem = await _db.StoreItem.Include(m => m.Category).Include(m => m.SubCategory).ToListAsync(),
-                Category = await _db.Category.ToListAsync(),
-                Discount = await _db.Discount.Where(c => c.IsActive == true).ToListAsync()
+                Category = await _db.Category.ToListAsync()
             };
 
             var claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -42,6 +41,7 @@ namespace Odjeca.Areas.Customer.Controllers
 
             return View(StoreVM);
         }
+
         public async Task<IActionResult> Details(int id)
         {
             var storeItemfromDb = await _db.StoreItem.Include(m => m.Category).Include(m => m.SubCategory).Where(m => m.Id == id).FirstOrDefaultAsync();

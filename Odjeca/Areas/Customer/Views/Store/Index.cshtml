@@ -1,17 +1,16 @@
 ﻿@model Odjeca.Models.ViewModels.StoreViewModel
 
 <div class="backgroundWhite container">
-
+    @* Category filter *@
     <ul id="item-filter" class="item-filter-list list-inline text-center">
         <li class="active btn btn-secondary ml-1 mr-1" data-filter=".items-store">Show All</li>
-
         @foreach (var item in Model.Category)
         {
             <li class="ml-1 mr-1" data-filter=".@item.Name.Replace(" ", string.Empty)">@item.Name</li>
         }
     </ul>
 
-
+    @* Group each category with it's items*@
     @foreach (var category in Model.Category)
     {
         <div class="row" id="menu-wrapper">
