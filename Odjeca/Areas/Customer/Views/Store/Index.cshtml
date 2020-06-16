@@ -1,0 +1,52 @@
+﻿@model Odjeca.Models.ViewModels.StoreViewModel
+
+<div class="backgroundWhite container">
+
+    <ul id="item-filter" class="item-filter-list list-inline text-center">
+        <li class="active btn btn-secondary ml-1 mr-1" data-filter=".items-store">Show All</li>
+
+        @foreach (var item in Model.Category)
+        {
+            <li class="ml-1 mr-1" data-filter=".@item.Name.Replace(" ", string.Empty)">@item.Name</li>
+        }
+    </ul>
+
+
+    @foreach (var category in Model.Category)
+    {
+        <div class="row" id="menu-wrapper">
+            <partial name="_ThumbnailAreaPartial" model="@Model.StoreItem.Where(u=>u.Category.Name.Equals(category.Name))" />
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+
+    <script>
+
+    var posts = $('.post');
+
+    (function ($) {
+
+        $("#item-filter li").click(function () {
+            $("#item-filter li").removeClass('active btn btn-secondary');
+            $(this).addClass('active btn btn-secondary');
+
+            var selectedFilter = $(this).data("filter");
+
+            $(".items-store").fadeOut();
+
+            setTimeout(function () {
+                $(selectedFilter).slideDown();
+            }, 300);
+        });
+
+
+
+    })(jQuery);
+
+    </script>
+} 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Odjeca.Models.ViewModels
 {
-    public class IndexViewModel
+    public class StoreViewModel
     {
         public IEnumerable<StoreItem> StoreItem { get; set; }
         public IEnumerable<Category> Category { get; set; }
