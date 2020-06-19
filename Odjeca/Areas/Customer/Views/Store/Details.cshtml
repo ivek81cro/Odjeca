@@ -1,4 +1,6 @@
-﻿@model ShoppingCart
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@model ShoppingCart
 @using Odjeca.Extensions
 @{
     ViewData["Title"] = "Item details";
@@ -65,7 +67,7 @@
                         <input asp-for="StoreItem.SubCategory.Name" readonly class="form-control" />
                     </div>
                 </div>
-                @if (User.IsInRole(Odjeca.Utility.SD.CustomerEndUser))
+                @if (SignInManager.IsSignedIn(User))
                 {
                     <div class="form-group row">
                         <div class="col-md-4">
@@ -84,7 +86,7 @@
                     <div class="col-md-4">
                         <a asp-action="Index" class="btn btn-success form-control">Back To List</a>
                     </div>
-                    @if (User.IsInRole(Odjeca.Utility.SD.CustomerEndUser))
+                    @if (SignInManager.IsSignedIn(User))
                     {
                         <div class="col-md-4">
                             <button type="submit" value="Add To Cart" class="btn btn-primary form-control">Add To Cart</button>

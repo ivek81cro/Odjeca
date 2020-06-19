@@ -16,7 +16,7 @@
             <div class="border2 border-left-0 border-right-0 col-12">
                 <div class="row">
                     <div class="col-md-3 col-sm-12">
-                        <img src="@item.Image" height="150" />
+                        <img class="img-thumbnail" src="@item.Image" />
                     </div>
                     <div class="col-md-9 col-sm-12">
                         <div class="row pr-3">
@@ -31,7 +31,7 @@
                         <div class="row col-12 text-justify d-none d-md-block">
                             <p class="detailsText">@Html.Raw(item.Description)</p>
                         </div>
-                        <div class="col-md-3 col-sm-12 offset-md-9 text-center">
+                        <div class="col-lg-3 col-md-12 text-center">
                             <a asp-action="Details" class="btn btn-success form-control" asp-route-id="@item.Id">Details</a>
                         </div>
                     </div>

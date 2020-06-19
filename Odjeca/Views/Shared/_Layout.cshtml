@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Odjeca</title>
+    <title>Sports Store @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/jquery-ui.css" />
@@ -96,20 +96,24 @@
         </nav>
     </header>
 
-    <div class="jumbotron text-center" style=" margin-bottom: 0px; background-color: #07617D;">
+    <div class="jumbotron text-center" id="head-jumbotron">
         <a asp-area="Customer" asp-controller="Home" asp-action="Index">
-            <img src="~/images/logo.png" />
+            <img class="img-fluid" src="~/images/logo.png" />
         </a>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid main-container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
+    <div id="bottom-links" class="row p-3 bottom-links h-25">
+        <partial name="_BottomLinksPartial" />
+    </div>
+
     <footer class="border-top footer pl-3 text-white-50" style="background-color: #343a40;">
         <div class="container">
-            &copy; 2020 - Odjeća
+            &copy; 2020 Sports Store
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

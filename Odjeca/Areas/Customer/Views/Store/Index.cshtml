@@ -1,22 +1,25 @@
 ﻿@model Odjeca.Models.ViewModels.StoreViewModel
 
-<div class="backgroundWhite container">
+<div class="backgroundWhite container-fluid col-12">
     @* Category filter *@
-    <ul id="item-filter" class="item-filter-list list-inline text-center">
-        <li class="active btn btn-secondary ml-1 mr-1" data-filter=".items-store">Show All</li>
+    <h6>Filter</h6>
+    <ul id="item-filter" class="nav col-md-2 col-12 row float-left">
+        <li class="nav-link w-75 mr-1" data-filter=".items-store">Show All</li>
         @foreach (var item in Model.Category)
         {
-            <li class="ml-1 mr-1" data-filter=".@item.Name.Replace(" ", string.Empty)">@item.Name</li>
+            <li class="nav-link w-75 mr-1" data-filter=".@item.Name.Replace(" ", string.Empty)">@item.Name</li>
         }
     </ul>
 
     @* Group each category with it's items*@
-    @foreach (var category in Model.Category)
-    {
-        <div class="row" id="menu-wrapper">
-            <partial name="_ThumbnailAreaPartial" model="@Model.StoreItem.Where(u=>u.Category.Name.Equals(category.Name))" />
-        </div>
-    }
+    <div class="col-md-9 container row col-12">
+        @foreach (var category in Model.Category)
+        {
+            <div class="col-md-12 row" id="menu-wrapper">
+                <partial name="_ThumbnailAreaPartial" model="@Model.StoreItem.Where(u=>u.Category.Name.Equals(category.Name))" />
+            </div>
+        }
+    </div>
 </div>
 
 @section Scripts{
@@ -26,26 +29,26 @@
 
     <script>
 
-    var posts = $('.post');
+        var posts = $('.post');
 
-    (function ($) {
+        (function ($) {
 
-        $("#item-filter li").click(function () {
-            $("#item-filter li").removeClass('active btn btn-secondary');
-            $(this).addClass('active btn btn-secondary');
+            $("#item-filter li").click(function () {
+                $("#item-filter li").removeClass('active');
+                $(this).addClass('active');
 
-            var selectedFilter = $(this).data("filter");
+                var selectedFilter = $(this).data("filter");
 
-            $(".items-store").fadeOut();
+                $(".items-store").fadeOut();
 
-            setTimeout(function () {
-                $(selectedFilter).slideDown();
-            }, 300);
-        });
+                setTimeout(function () {
+                    $(selectedFilter).slideDown();
+                }, 300);
+            });
 
 
 
-    })(jQuery);
+        })(jQuery);
 
     </script>
 } 
