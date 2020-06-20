@@ -17,7 +17,12 @@
 </head>
 <body class="search-background">
     <header>
-        <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+        <div class="jumbotron text-center" id="head-jumbotron">
+            <a asp-area="Customer" asp-controller="Home" asp-action="Index">
+                <img class="img-fluid" src="~/images/logo.png" />
+            </a>
+        </div>
+        <nav class="navbar sticky-top navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -96,11 +101,6 @@
         </nav>
     </header>
 
-    <div class="jumbotron text-center" id="head-jumbotron">
-        <a asp-area="Customer" asp-controller="Home" asp-action="Index">
-            <img class="img-fluid" src="~/images/logo.png" />
-        </a>
-    </div>
     <div class="container-fluid main-container">
         <main role="main" class="pb-3">
             @RenderBody()
