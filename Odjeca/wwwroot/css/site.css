@@ -61,6 +61,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  padding-top:60px;
 }
 
 .footer {
@@ -147,4 +148,15 @@ body {
 
 #menu-wrapper {
     border-left: 1px solid black;
+}
+
+#navbar-logo{
+    height:1em;
+}
+
+#border-top-bottom {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-top: 1%;
+    margin-bottom: 1%
 }

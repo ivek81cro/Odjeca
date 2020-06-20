@@ -4,10 +4,10 @@
     @* Category filter *@
     <h6>Filter</h6>
     <ul id="item-filter" class="nav col-md-2 col-12 row float-left">
-        <li class="nav-link w-75 mr-1" data-filter=".items-store">Show All</li>
+        <li class="btn w-75 mr-1" data-filter=".items-store">Show All</li>
         @foreach (var item in Model.Category)
         {
-            <li class="nav-link w-75 mr-1" data-filter=".@item.Name.Replace(" ", string.Empty)">@item.Name</li>
+            <li class="btn w-75 mr-1" data-filter=".@item.Name.Replace(" ", string.Empty)">@item.Name</li>
         }
     </ul>
 
@@ -42,7 +42,7 @@
                 $(".items-store").fadeOut();
 
                 setTimeout(function () {
-                    $(selectedFilter).slideDown();
+                    $(selectedFilter).fadeIn();
                 }, 300);
             });
 
