@@ -18,8 +18,9 @@
                             }
                             <img class="img-fluid mx-auto d-block h-25" src="@imgsrc" />
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>@Model.Discount.ToList()[i].Title</h5>
+                                <h4 class="font-weight-bold">@Model.Discount.ToList()[i].Title</h4>
                                 <p>@Model.Discount.ToList()[i].Description</p>
+                                <a class="btn btn-info" asp-area="Customer" asp-controller="Store" asp-action="Index">Shop</a>
                             </div>
                         </div>
                             }
@@ -32,8 +33,9 @@
                             }
                             <img class="img-fluid mx-auto d-block h-25" src="@imgsrc" />
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>@Model.Discount.ToList()[i].Title</h5>
+                                <h4 class="font-weight-bold">@Model.Discount.ToList()[i].Title</h4>
                                 <p>@Model.Discount.ToList()[i].Description</p>
+                                <a class="btn btn-info" asp-area="Customer" asp-controller="Store" asp-action="Index">Shop</a>
                             </div>
                         </div>
                         }
