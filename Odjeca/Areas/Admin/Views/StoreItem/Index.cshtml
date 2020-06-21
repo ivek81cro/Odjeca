@@ -32,6 +32,9 @@
                     <th>
                         @Html.DisplayNameFor(m => m.SubCategoryId)
                     </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.ArrivalDate)
+                    </th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -49,6 +52,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(m => item.SubCategory.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.ArrivalDate)
                 </td>
                 <td>
                     <partial name="_TableButtonPartial" model="item.Id" />

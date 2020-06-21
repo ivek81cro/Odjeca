@@ -71,9 +71,9 @@ namespace Odjeca.Areas.Admin.Controllers
                 var uploads = Path.Combine(webRootPath, "images");
                 var extension = Path.GetExtension(files[0].FileName);
 
-                using (var fileStrean = new FileStream(Path.Combine(uploads,StoreItemVM.StoreItem.Id+extension), FileMode.Create))
+                using (var fileStream = new FileStream(Path.Combine(uploads,StoreItemVM.StoreItem.Id+extension), FileMode.Create))
                 {
-                    files[0].CopyTo(fileStrean);
+                    files[0].CopyTo(fileStream);
                 }
                 storeItemFromDB.Image = @"\images\" + StoreItemVM.StoreItem.Id + extension;
             }
@@ -83,7 +83,7 @@ namespace Odjeca.Areas.Admin.Controllers
                 System.IO.File.Copy(uploads, webRootPath + @"\images\" + StoreItemVM.StoreItem.Id + ".png");
                 storeItemFromDB.Image = @"\images\" + StoreItemVM.StoreItem.Id + ".png";
             }
-
+            storeItemFromDB.ArrivalDate = DateTime.Now;
             await _db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

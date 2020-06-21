@@ -31,5 +31,7 @@ namespace Odjeca.Models
 
         [Range(0.01, int.MaxValue, ErrorMessage ="Price should be greater than 0.01$")]
         public double Price { get; set; }
+
+        public DateTime ArrivalDate { get; set; }
     }
 }
