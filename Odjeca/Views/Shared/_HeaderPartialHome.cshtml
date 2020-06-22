@@ -3,7 +3,7 @@
 @inject IHttpContextAccessor HttpContextAccessor
 
 <header>
-    <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+    <nav class="navbar fixed-top navbar-expand-md navbar-toggleable-md navbar-dark bg-dark border-bottom box-shadow mb-3">
         <div class="container">
             <nav class="navbar-brand">
                 <a asp-area="Customer" asp-controller="Home" asp-action="Index">
@@ -14,7 +14,7 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            <div class="navbar-collapse collapse d-md-inline-flex flex-md-row-reverse">
                 <partial name="_LoginPartial" />
                 <ul class="navbar-nav flex-grow-1">
                     <li>
@@ -23,12 +23,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link text-light">
+                        <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="About">
                             About Us
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link text-light">
+                        <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Brands">
                             Brands
                         </a>
                     </li>
@@ -38,12 +38,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link text-light">
+                        <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Faq">
                             FAQ
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link text-light">
+                        <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Contact">
                             Contact
                         </a>
                     </li>
