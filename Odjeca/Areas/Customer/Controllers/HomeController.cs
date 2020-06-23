@@ -28,7 +28,8 @@ namespace Odjeca.Controllers
         {
             StoreViewModel StoreVM = new StoreViewModel()
             {
-                Discount = await _db.Discount.Where(c => c.IsActive == true).ToListAsync()
+                Discount = await _db.Discount.Where(c => c.IsActive == true).ToListAsync(),
+                StoreItem = await _db.StoreItem.Where(s => s.Id != 0).ToListAsync()         
             };
 
             var claimsIdentity = (ClaimsIdentity)User.Identity;
