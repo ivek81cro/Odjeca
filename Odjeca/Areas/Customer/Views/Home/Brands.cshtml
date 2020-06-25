@@ -1,27 +1,21 @@
-﻿<div class="list-group container mt-4 mb-4 backgroundWhite">
+﻿@model Odjeca.Models.ViewModels.StoreViewModel
+
+<div class="list-group container mt-4 mb-4 backgroundWhite">
     <h2>Brands</h2><hr /><br />
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Brand and picture</h5>
-            <small>3 days ago</small>
-        </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        <small>Donec id elit non mi porta.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Brand and picture</h5>
-            <small class="text-muted">3 days ago</small>
-        </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        <small class="text-muted">Donec id elit non mi porta.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Brand and picture</h5>
-            <small class="text-muted">3 days ago</small>
-        </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        <small class="text-muted">Donec id elit non mi porta.</small>
-    </a>
+    @foreach (var brand in Model.Brands)
+    {
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">@brand.Name</h5>
+                @{
+                    var base64 = Convert.ToBase64String(brand.Image);
+                    var imgsrc = string.Format("data:image/png;base64,{0}", base64);
+                }
+                <img src="@imgsrc" />
+                <small>3 days ago</small>
+            </div>
+            <p class="mb-1">@brand.Description</p>
+            <small>Follow link to visit brand web site</small>
+        </a>
+    }
 </div>

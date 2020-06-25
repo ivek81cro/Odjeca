@@ -44,7 +44,7 @@ namespace Odjeca.Areas.Admin.Controllers
                 {
                     //saving picture to database as byte of streams
                     byte[] p1 = null;
-                    using(var fs1 = files[0].OpenReadStream())
+                    using (var fs1 = files[0].OpenReadStream())
                     {
                         using (var ms1 = new MemoryStream())
                         {

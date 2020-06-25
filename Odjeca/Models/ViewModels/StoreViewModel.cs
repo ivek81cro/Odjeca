@@ -10,5 +10,6 @@ namespace Odjeca.Models.ViewModels
         public IEnumerable<StoreItem> StoreItem { get; set; }
         public IEnumerable<Category> Category { get; set; }
         public IEnumerable<Discount> Discount { get; set; }
+        public IEnumerable<Brands> Brands { get; set; }
     }
 }

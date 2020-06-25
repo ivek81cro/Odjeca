@@ -3,69 +3,71 @@
     ViewData["Title"] = "Delete";
 }
 
-<br />
-<h2 class="text-info">Discount Details</h2>
-<br />
-<div class="row  backgroundWhiteBorder">
+<div class="container">
     <br />
-    <div class=" col-12 border">
-        @{
-            var base64 = Convert.ToBase64String(Model.Picture);
-            var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
-        }
-        <img class="img-thumbnail" src="@imgsrc" />
-    </div>
-    <div class="col-12 pt-4">
-        <fieldset disabled>
-            <div class="form-group row">
-                <div class="col-2">
-                    <label asp-for="Name" class="custom-label"></label>
-                </div>
-                <div class="col-5">
-                    <input asp-for="Name" class="form-control" />
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-2">
-                    <label asp-for="DiscountType" class="custom-label"></label>
-                </div>
-                <div class="col-5">
-                    <select asp-for="DiscountType" asp-items="Html.GetEnumSelectList<Discount.EDiscountType>()" class="form-control"></select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-2">
-                    <label asp-for="DiscountAmmount" class="custom-label"></label>
-                </div>
-                <div class="col-5">
-                    <input asp-for="DiscountAmmount" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-2">
-                    <label asp-for="MinimumAmmount" class="custom-label"></label>
-                </div>
-                <div class="col-5">
-                    <input asp-for="MinimumAmmount" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-2">
-                    <label asp-for="IsActive" class="custom-label"></label>
-                </div>
-                <div class="col-5">
-                    <input type="checkbox" asp-for="IsActive" class="form-control" />
-                </div>
-            </div>
-
-        </fieldset>
+    <h2 class="text-info">Discount Details</h2>
+    <br />
+    <div class="row  backgroundWhiteBorder">
         <br />
-        <div class="form-group row">
-            <div class="col-5 offset-2">
-                <partial name="_DetailsAndBackButton" model="@Model.Id" />
+        <div class=" col-12 border">
+            @{
+                var base64 = Convert.ToBase64String(Model.Picture);
+                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+            }
+            <img class="img-thumbnail" src="@imgsrc" />
+        </div>
+        <div class="col-12 pt-4">
+            <fieldset disabled>
+                <div class="form-group row">
+                    <div class="col-2">
+                        <label asp-for="Name" class="custom-label"></label>
+                    </div>
+                    <div class="col-5">
+                        <input asp-for="Name" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-2">
+                        <label asp-for="DiscountType" class="custom-label"></label>
+                    </div>
+                    <div class="col-5">
+                        <select asp-for="DiscountType" asp-items="Html.GetEnumSelectList<Discount.EDiscountType>()" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-2">
+                        <label asp-for="DiscountAmmount" class="custom-label"></label>
+                    </div>
+                    <div class="col-5">
+                        <input asp-for="DiscountAmmount" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-2">
+                        <label asp-for="MinimumAmmount" class="custom-label"></label>
+                    </div>
+                    <div class="col-5">
+                        <input asp-for="MinimumAmmount" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-2">
+                        <label asp-for="IsActive" class="custom-label"></label>
+                    </div>
+                    <div class="col-5">
+                        <input type="checkbox" asp-for="IsActive" class="form-control" />
+                    </div>
+                </div>
+
+            </fieldset>
+            <br />
+            <div class="form-group row">
+                <div class="col-5 offset-2">
+                    <partial name="_DetailsAndBackButton" model="@Model.Id" />
+                </div>
             </div>
         </div>
-    </div>
 
+    </div>
 </div>
