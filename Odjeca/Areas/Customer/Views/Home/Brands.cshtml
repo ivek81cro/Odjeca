@@ -11,7 +11,7 @@
                     var base64 = Convert.ToBase64String(brand.Image);
                     var imgsrc = string.Format("data:image/png;base64,{0}", base64);
                 }
-                <img src="@imgsrc" />
+                <img class="img-fluid" src="@imgsrc" />
                 <small>3 days ago</small>
             </div>
             <p class="mb-1">@brand.Description</p>

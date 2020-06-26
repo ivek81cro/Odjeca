@@ -160,3 +160,13 @@ body {
     margin-top: 1%;
     margin-bottom: 1%
 }
+
+#footer-custom ul li a{
+    color:dimgray;
+    text-decoration:none;
+}
+
+#footer-custom ul li a:hover {
+    color: lightgray;
+    text-decoration: none;
+}
