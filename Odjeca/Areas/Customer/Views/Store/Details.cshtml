@@ -14,7 +14,7 @@
     <form method="post">
         <div class="border backgroundWhite row">
             <div class="col-12 pb-4 d-md-none">
-                <img src="@Model.StoreItem.Image" class="img-thumbnail" />
+                <img src="@Model.StoreItem.Image" class="img-fluid" />
             </div>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="col-md-8">
@@ -83,7 +83,7 @@
 
                     </div>
                     <div class="col-md-4">
-                        <a asp-action="Index" class="btn btn-success form-control">Back To List</a>
+                        <a asp-action="Index" class="btn btn-success form-control">Back To Store</a>
                     </div>
                     @if (SignInManager.IsSignedIn(User))
                     {
