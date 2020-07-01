@@ -4,45 +4,45 @@
 
 <header>
     <nav class="navbar fixed-top navbar-expand-md navbar-toggleable-md navbar-dark bg-dark border-bottom box-shadow mb-3">
-        <div class="container">
-            <nav class="navbar-brand">
+        <div class="container d-flex align-items-center">
+            <div class="navbar-brand">
                 <a asp-area="Customer" asp-controller="Home" asp-action="Index">
                     <img class="img-fluid" src="~/images/logo.png" />
                 </a>
-            </nav>
+            </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-md-inline-flex flex-md-row-reverse">
+            <nav class="navbar-collapse collapse d-md-inline-flex flex-md-row-reverse">
                 <partial name="_LoginPartial" />
                 <ul class="navbar-nav flex-grow-1">
-                    <li>
+                    <li class="nav-item">
                         <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Index">
                             Home
                         </a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="About">
                             About Us
                         </a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Brands">
                             Brands
                         </a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <a class="nav-link text-light" asp-area="Customer" asp-controller="Store" asp-action="Index">
                             Store
                         </a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Faq">
                             FAQ
                         </a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Contact">
                             Contact
                         </a>
@@ -67,7 +67,7 @@
 
                     @if (HttpContextAccessor.HttpContext.Session.GetInt32(@SD.ssShoppingCartCount) != null)
                     {
-                        <li>
+                        <li class="nav-item">
                             <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
                                 @{ var count = HttpContextAccessor.HttpContext.Session.GetInt32(@SD.ssShoppingCartCount); }
                                 <i class="fas fa-shopping-cart"></i>&nbsp; (@count)
@@ -76,14 +76,14 @@
                     }
                     else
                     {
-                        <li>
+                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-shopping-cart"></i>&nbsp; (0)
                             </a>
                         </li>
                     }
                 </ul>
-            </div>
+            </nav>
         </div>
     </nav>
 </header>

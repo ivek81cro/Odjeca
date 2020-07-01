@@ -4,12 +4,14 @@
     <h2 class="mt-3">Store</h2>
     @* Category filter *@
     <div id="item-filter" class="accordion col-md-2 col-12 float-left">
-        <h6>Filter</h6>
-        <a class="btn active w-75 mr-1" data-filter=".items-store" data-toggle="collapse" data-target="#collapseAll">Show All</a>
+        <h5 class="mt-2">Filter</h5>
+        <div class="border-bottom">
+            <a class="btn d-flex w-100 justify-content-center" data-filter=".items-store" id="all">Show All</a>
+        </div>
         @foreach (var item in Model.Category)
         {
-            <div data-toggle="collapse" data-target="#@item.Name">
-                <a class="btn w-75 mr-1" data-filter=".@item.Name.Replace(" ", string.Empty)">@item.Name</a>
+            <div class="border-bottom" data-toggle="collapse" data-target="#@item.Name">
+                <a class="btn d-flex w-100 justify-content-center" data-filter=".@item.Name.Replace(" ", string.Empty)">@item.Name</a>
             </div>
 
             var subCat = Model.SubCategory.Where(si => si.CategoryId == item.Id);
@@ -46,8 +48,8 @@
 
         (function ($) {
 
-            $("#item-filter li").click(function () {
-                $("#item-filter li").removeClass('active');
+            $("#item-filter li, #all").click(function () {
+                $("#item-filter li, #all").removeClass('active');
                 $(this).addClass('active');
 
                 var selectedFilter = $(this).data("filter");
