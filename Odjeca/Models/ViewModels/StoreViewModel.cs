@@ -11,6 +11,5 @@ namespace Odjeca.Models.ViewModels
         public IEnumerable<Category> Category { get; set; }
         public IEnumerable<Discount> Discount { get; set; }
         public IEnumerable<Brands> Brands { get; set; }
-        public IEnumerable<SubCategory> SubCategory { get; set; }
     }
 }

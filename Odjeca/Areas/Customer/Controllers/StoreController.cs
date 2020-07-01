@@ -27,8 +27,7 @@ namespace Odjeca.Areas.Customer.Controllers
             StoreViewModel StoreVM = new StoreViewModel()
             {
                 StoreItem = await _db.StoreItem.Include(m => m.Category).Include(m => m.SubCategory).ToListAsync(),
-                Category = await _db.Category.ToListAsync(),
-                SubCategory = await _db.SubCategory.ToListAsync()
+                Category = await _db.Category.ToListAsync()
             };
 
             var claimsIdentity = (ClaimsIdentity)User.Identity;
