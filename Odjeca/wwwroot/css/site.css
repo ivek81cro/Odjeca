@@ -126,6 +126,10 @@ body {
     color: #fff;
 }
 
+#item-filter li:hover {
+    color: aqua;
+}
+
 .border2 {
     border: 5px solid #dee2e6;
     padding: 5px;
@@ -140,10 +144,6 @@ body {
     background-image:url("../images/headerback.PNG");
     background-repeat:no-repeat;
     background-size:cover;
-}
-
-#item-filter li:hover {
-    color:aqua;
 }
 
 #menu-wrapper {
