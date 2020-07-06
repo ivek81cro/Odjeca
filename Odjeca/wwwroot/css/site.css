@@ -170,3 +170,8 @@ body {
     color: lightgray;
     text-decoration: none;
 }
+
+#modal-details
+{
+    min-width: 70%;
+}

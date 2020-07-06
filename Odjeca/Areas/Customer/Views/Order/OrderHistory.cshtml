@@ -39,6 +39,7 @@
                         <th>
                             Total Items
                         </th>
+                        <th></th>
                     </tr>
                     @foreach (var item in Model)
                     {
@@ -61,6 +62,11 @@
                     <td>
                         @Html.DisplayFor(m => item.OrderDetails.Count)
                     </td>
+                    <td>
+                        <button type="submit" class="btn btn-success anchorDetail" data-id="@item.OrderHeader.Id" data-toggle="modal">
+                            <i class="far fa-list-alt"></i> Details
+                        </button>
+                    </td>
                 </tr>
                     }
                 </table>
@@ -72,3 +78,46 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="modal-details" class="modal-dialog-centered modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-light justify-content-center">
+                <h5 class="modal-title">Order Details</h5>
+            </div>
+            <div class="modal-body justify-content-center" id="myModalContent">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{ 
+    <script>
+
+        $(function () {
+            $(".anchorDetail").click(function () {
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var urlString = '@Url.Action("GetOrderDetails", "Order")';
+
+                $.ajax({
+                    type: "GET",
+                    url: urlString + "/" + id,
+                    contentType: "application/json; charset=utf-8",                    
+                    success: function (data) {
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal('show');
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed");
+                    }
+                })
+            })
+        })
+    </script>
+}
