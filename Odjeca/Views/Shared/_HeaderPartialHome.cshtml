@@ -4,7 +4,7 @@
 
 <header>
     <nav class="navbar fixed-top navbar-expand-md navbar-toggleable-md navbar-dark bg-dark border-bottom box-shadow mb-3">
-        <div class="container d-flex align-items-center">
+        <div class="container-fluid d-flex align-items-center">
             <div class="navbar-brand">
                 <a asp-area="Customer" asp-controller="Home" asp-action="Index">
                     <img class="img-fluid" src="~/images/logo.png" />
@@ -65,10 +65,19 @@
                         </li>
                     }
 
+                    @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.CustomerEndUser))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Customer" asp-controller="Order" asp-action="OrderHistory">
+                                Order History
+                            </a>
+                        </li>
+                    }
+
                     @if (HttpContextAccessor.HttpContext.Session.GetInt32(@SD.ssShoppingCartCount) != null)
                     {
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                            <a class="nav-link text-light" asp-area="Customer" asp-controller="Cart" asp-action="Index">
                                 @{ var count = HttpContextAccessor.HttpContext.Session.GetInt32(@SD.ssShoppingCartCount); }
                                 <i class="fas fa-shopping-cart"></i>&nbsp; (@count)
                             </a>
@@ -77,7 +86,7 @@
                     else
                     {
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="#" class="nav-link text-light">
                                 <i class="fas fa-shopping-cart"></i>&nbsp; (0)
                             </a>
                         </li>
