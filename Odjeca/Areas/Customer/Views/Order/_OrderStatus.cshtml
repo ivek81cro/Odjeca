@@ -1,0 +1,25 @@
+﻿@model string
+@using Odjeca.Utility
+
+<div class="w-100">
+    @if (Model == SD.StatusSubmitted)
+    {
+        <img src="~/images/OrderPlaced.png" class="w-100 img-fluid" />
+    } 
+    else if(Model == SD.StatusInProcess)
+    {
+        <img src="~/images/InProcess.png" class="w-100 img-fluid" />
+    }
+    else if (Model == SD.StatusReady)
+    {
+        <img src="~/images/Ready.png" class="w-100 img-fluid" />
+    }
+    else if (Model == SD.StatusCompleted)
+    {
+        <img src="~/images/Completed.PNG" class="w-100 img-fluid" />
+    }
+    else
+    {
+        <p>No status, try again later please.</p>
+    }
+</div>

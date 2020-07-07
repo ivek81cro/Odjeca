@@ -1,4 +1,5 @@
 ﻿@model Odjeca.Models.ViewModels.OrderListViewModel
+@using Odjeca.Utility
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,59 +20,67 @@
         <div>
             @if (Model.Orders.Count() > 0)
             {
-                <table class="table table-striped border">
-                    <tr class="table-secondary">
-                        <th>
-                            @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.Id)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.PickupName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.ApplicationUser.Email)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.PickUpTime)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.OrderTotal)
-                        </th>
-                        <th>
-                            Total Items
-                        </th>
-                        <th></th>
-                    </tr>
-                    @foreach (var item in Model.Orders)
-                    {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(m => item.OrderHeader.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.OrderHeader.PickupName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.OrderHeader.ApplicationUser.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.OrderHeader.PickUpTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.OrderHeader.OrderTotal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => item.OrderDetails.Count)
-                    </td>
-                    <td>
-                        <button type="submit" class="btn btn-success anchorDetail" data-id="@item.OrderHeader.Id" data-toggle="modal">
-                            <i class="far fa-list-alt"></i> Details
-                        </button>
-                    </td>
-                </tr>
-                    }
-                </table>
-                <div page-model="@Model.PagingInfo" page-classes-enabled="true" page-class="btn order" 
-                     page-class-normal="btn btn-light" page-class-selected="btn-info active" class="btn-group float-right">
+                <div class="table-responsive">
+                    <table class="table table-striped border">
+                        <tr class="table-secondary">
+                            <th>
+                                @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.Id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.PickupName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.ApplicationUser.Email)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.PickUpTime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(m => m.Orders[0].OrderHeader.OrderTotal)
+                            </th>
+                            <th>
+                                Total Items
+                            </th>
+                            <th></th>
+                        </tr>
+                        @foreach (var item in Model.Orders)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(m => item.OrderHeader.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.OrderHeader.PickupName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.OrderHeader.ApplicationUser.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.OrderHeader.PickUpTime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.OrderHeader.OrderTotal)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.OrderDetails.Count)
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-success anchorDetail" data-id="@item.OrderHeader.Id" data-toggle="modal">
+                                        <i class="far fa-list-alt"></i> Details
+                                    </button>
+                                    @if (item.OrderHeader.Status != SD.StatusCancelled)
+                                    {
+                                        <button type="submit" class="btn btn-info orderStatus" data-id="@item.OrderHeader.Id" data-toggle="modal">
+                                            <i class="far fa-clock-o"></i> Status
+                                        </button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div page-model="@Model.PagingInfo" page-classes-enabled="true" page-class="btn border"
+                     page-class-normal="btn btn-light" page-class-selected="btn btn-info active" class="btn-group float-right">
                 </div>
                 <br />
             }
@@ -99,20 +108,36 @@
     </div>
 </div>
 
+<div class="modal fade" id="myOrderStatus" tabindex="-1" role="dialog" aria-hidden="true">
+    <div id="modal-details" class="modal-dialog-centered modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-light justify-content-center">
+                <h5 class="modal-title">Order Status</h5>
+            </div>
+            <div class="modal-body justify-content-center" id="myOrderStatusContent">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section scripts
-{ 
+{
     <script>
+        var urlString = '@Url.Action("GetOrderDetails", "Order")';
+        var urlStringStatus = '@Url.Action("GetOrderStatus", "Order")';
 
         $(function () {
             $(".anchorDetail").click(function () {
                 var $buttonClicked = $(this);
                 var id = $buttonClicked.attr('data-id');
-                var urlString = '@Url.Action("GetOrderDetails", "Order")';
 
                 $.ajax({
                     type: "GET",
                     url: urlString + "/" + id,
-                    contentType: "application/json; charset=utf-8",                    
+                    contentType: "application/json; charset=utf-8",
                     success: function (data) {
                         $('#myModalContent').html(data);
                         $('#myModal').modal('show');
@@ -120,8 +145,25 @@
                     error: function () {
                         alert("Dynamic content load failed");
                     }
-                })
-            })
-        })
+                });
+            });
+
+            $(".orderStatus").click(function () {
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                $.ajax({
+                    type: "GET",
+                    url: urlStringStatus + "/" + id,
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        $('#myOrderStatusContent').html(data);
+                        $('#myOrderStatus').modal('show');
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed");
+                    }
+                });
+            });
+        });
     </script>
 }

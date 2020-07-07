@@ -17,7 +17,7 @@ namespace Odjeca.Areas.Customer.Controllers
     {
 
         private readonly ApplicationDbContext _db;
-        private int PageSize = 2;
+        private int PageSize = 5;
         public OrderController(ApplicationDbContext db)
         {
             _db = db;
@@ -40,6 +40,11 @@ namespace Odjeca.Areas.Customer.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult GetOrderStatus(int Id)
+        {
+            return PartialView("_OrderStatus", _db.OrderHeader.Where(m => m.Id == Id).FirstOrDefault().Status);
         }
 
         [Authorize]
