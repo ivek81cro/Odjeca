@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Odjeca.Utility;
 using Stripe;
 using Microsoft.AspNetCore.HttpOverrides;
+using System.Globalization;
 
 namespace Odjeca
 {
@@ -89,6 +90,12 @@ namespace Odjeca
                     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            var cultureInfo = new CultureInfo("en-US");
+            cultureInfo.NumberFormat.CurrencySymbol = "$";
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
         }
     }
 }
