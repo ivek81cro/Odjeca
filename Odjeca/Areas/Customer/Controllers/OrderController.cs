@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Odjeca.Data;
 using Odjeca.Models;
 using Odjeca.Models.ViewModels;
+using Odjeca.Utility;
 
 namespace Odjeca.Areas.Customer.Controllers
 {
@@ -84,6 +85,28 @@ namespace Odjeca.Areas.Customer.Controllers
             };
 
             return View(orderListVM);
+        }
+
+        [Authorize(Roles = SD.StorageUser + "," + SD.ManagerUser)]
+        public async Task<IActionResult> ManageOrder()
+        {
+            List<OrderDetailsViewModel> orderDetailsVM = new List<OrderDetailsViewModel>();
+
+            List<OrderHeader> orderHeaderList = await _db.OrderHeader
+                .Where(o => o.Status == SD.StatusSubmitted || o.Status == SD.StatusInProcess)
+                .OrderByDescending(o => o.PickUpTime).ToListAsync();
+
+            foreach (OrderHeader item in orderHeaderList)
+            {
+                OrderDetailsViewModel individual = new OrderDetailsViewModel
+                {
+                    OrderHeader = item,
+                    OrderDetails = await _db.OrderDetails.Where(o => o.OrderId == item.Id).ToListAsync()
+                };
+                orderDetailsVM.Add(individual);
+            }
+
+            return View(orderDetailsVM.OrderBy(o => o.OrderHeader.PickUpTime));
         }
 
         public async Task<IActionResult> GetOrderDetails(int Id)
