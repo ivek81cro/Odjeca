@@ -106,7 +106,7 @@ namespace Odjeca.Areas.Customer.Controllers
                 orderDetailsVM.Add(individual);
             }
 
-            return View(orderDetailsVM.OrderBy(o => o.OrderHeader.PickUpTime));
+            return View(orderDetailsVM.OrderBy(o => o.OrderHeader.PickUpTime).ToList());
         }
 
         public async Task<IActionResult> GetOrderDetails(int Id)
@@ -119,6 +119,37 @@ namespace Odjeca.Areas.Customer.Controllers
             orderDetailsViewModel.OrderHeader.ApplicationUser = await _db.ApplicationUser.FirstOrDefaultAsync(u => u.Id == orderDetailsViewModel.OrderHeader.UserId);
 
             return PartialView("_IndividualOrderDetails", orderDetailsViewModel);
+        }
+
+        [Authorize(Roles = SD.StorageUser + "," + SD.ManagerUser)]
+        public async Task<IActionResult> OrderPrepare(int OrderId)
+        {
+            OrderHeader oh = await _db.OrderHeader.FindAsync(OrderId);
+            oh.Status = SD.StatusInProcess;
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("ManageOrder", "Order");
+        }
+
+        [Authorize(Roles = SD.StorageUser + "," + SD.ManagerUser)]
+        public async Task<IActionResult> OrderReady(int OrderId)
+        {
+            OrderHeader oh = await _db.OrderHeader.FindAsync(OrderId);
+            oh.Status = SD.StatusReady;
+            await _db.SaveChangesAsync();
+
+            //Add email to user that order is ready
+            return RedirectToAction("ManageOrder", "Order");
+        }
+
+        [Authorize(Roles = SD.StorageUser + "," + SD.ManagerUser)]
+        public async Task<IActionResult> OrderCancel(int OrderId)
+        {
+            OrderHeader oh = await _db.OrderHeader.FindAsync(OrderId);
+            oh.Status = SD.StatusCancelled;
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("ManageOrder", "Order");
         }
     }
 }

@@ -125,7 +125,7 @@ namespace Odjeca.Areas.Customer.Controllers
             DetailCart.OrderHeader.PaymentStatus = SD.PaymentStatusPending;
             DetailCart.OrderHeader.OrderDate = DateTime.Now;
             DetailCart.OrderHeader.UserId = claim.Value;
-            DetailCart.OrderHeader.Status = SD.PaymentStatusPending;
+            DetailCart.OrderHeader.Status = SD.StatusSubmitted;
             DetailCart.OrderHeader.PickUpTime = Convert.ToDateTime(DetailCart.OrderHeader.PickUpDate.ToShortDateString() + " " + DetailCart.OrderHeader.PickUpTime.ToShortTimeString());
 
             List<OrderDetails> orderDetailsList = new List<OrderDetails>();
