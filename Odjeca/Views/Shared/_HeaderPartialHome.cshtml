@@ -12,6 +12,7 @@
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
+                Menu
                 <span class="navbar-toggler-icon"></span>
             </button>
             <nav class="navbar-collapse collapse d-md-inline-flex flex-md-row-reverse">
@@ -22,29 +23,32 @@
                             Home
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="About">
-                            About Us
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Brands">
-                            Brands
-                        </a>
-                    </li>
+                    @if (!User.IsInRole(SD.ManagerUser) && !User.IsInRole(SD.FrontDeskUser) && !User.IsInRole(SD.StorageUser))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="About">
+                                About Us
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Brands">
+                                Brands
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Faq">
+                                FAQ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Contact">
+                                Contact
+                            </a>
+                        </li>
+                    }
                     <li class="nav-item">
                         <a class="nav-link text-light" asp-area="Customer" asp-controller="Store" asp-action="Index">
                             Store
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Faq">
-                            FAQ
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Contact">
-                            Contact
                         </a>
                     </li>
                     @if (User.IsInRole(SD.ManagerUser))
@@ -71,6 +75,26 @@
                             <a class="nav-link text-light" asp-area="Customer" asp-controller="Order" asp-action="OrderHistory">
                                 Order History
                             </a>
+                        </li>
+                    }
+
+                    @if (User.IsInRole(SD.StorageUser) || User.IsInRole(SD.FrontDeskUser) || User.IsInRole(SD.ManagerUser))
+                    {
+                        <li class="nav-item dropdown text-white-50">
+                            <a class="nav-link dropdown-toggle text-light" href"#" id="navbarDropDown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                Order Management
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+                                @if (User.IsInRole(SD.StorageUser) || User.IsInRole(SD.ManagerUser))
+                                {
+                                    <a class="dropdown-item" asp-action="ManageOrder" asp-controller="Order" asp-area="Customer">Manage Order</a>
+                                }
+                                @if (User.IsInRole(SD.FrontDeskUser) || User.IsInRole(SD.ManagerUser))
+                                {
+                                    <a class="dropdown-item" asp-action="OrderPickup" asp-controller="Order" asp-area="Customer">Order Pickup</a>
+                                }
+                            </div>
                         </li>
                     }
 
