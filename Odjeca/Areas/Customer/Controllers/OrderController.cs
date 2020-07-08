@@ -59,7 +59,16 @@ namespace Odjeca.Areas.Customer.Controllers
                 Orders = new List<OrderDetailsViewModel>()
             };
 
-            List<OrderHeader> orderHeaderList = await _db.OrderHeader.Include(o => o.ApplicationUser).Where(u => u.UserId == claim.Value).ToListAsync();
+            List<OrderHeader> orderHeaderList;
+
+            if (User.IsInRole(SD.ManagerUser))
+            {
+                orderHeaderList = await _db.OrderHeader.Include(o => o.ApplicationUser).ToListAsync();
+            }
+            else
+            {
+                orderHeaderList = await _db.OrderHeader.Include(o => o.ApplicationUser).Where(u => u.UserId == claim.Value).ToListAsync();
+            }
 
             foreach (OrderHeader item in orderHeaderList)
             {
