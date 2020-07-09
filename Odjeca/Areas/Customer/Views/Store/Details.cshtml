@@ -7,14 +7,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<br />
-<h2 class="text-info">Item Details</h2>
-<br />
-<div class="container">
+<div class="container backgroundWhite">
+    <br />
+    <h2 class="text-info">Item Details</h2>
+    <br />
     <form method="post">
-        <div class="border backgroundWhite row">
-            <div class="col-12 pb-4 d-md-none">
-                <img src="@Model.StoreItem.Image" class="img-fluid" />
+        <div class="border rounded row pt-2">
+            <div class="col-12 d-md-none">
+                <img src="@Model.StoreItem.Image" class="img-fluid img-thumbnail border rounded" />
             </div>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="col-md-8">
@@ -95,7 +95,7 @@
             </div>
 
             <div class="col-md-3 offset-1 d-none d-md-block">
-                <img src="@Model.StoreItem.Image" width="100" style="border-radius:5px; border: 1px solid #bbb9b9;" />
+                <img src="@Model.StoreItem.Image" class="img-fluid  border rounded" />
             </div>
         </div>
         <input asp-for="StoreItemId" hidden />
