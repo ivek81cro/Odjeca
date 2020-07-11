@@ -163,7 +163,7 @@ namespace Odjeca.Areas.Customer.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> OrderPickup(int productPage = 1, string searchEmail = null, string searchName = null, string searchPhone = null)
+        public async Task<IActionResult> OrderPickup(int productPage = 1, string searchEmail = null, string searchPhone = null, string searchName = null)
         {
             //var claimsIdentity = (ClaimsIdentity)User.Identity;
             //var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -255,15 +255,14 @@ namespace Odjeca.Areas.Customer.Controllers
             return View(orderListVM);
         }
 
-        [Authorize(Roles =SD.FrontDeskUser + "," + SD.ManagerUser)]
+        [Authorize(Roles = SD.FrontDeskUser + "," + SD.ManagerUser)]
         [HttpPost]
-        [ActionName("OrderPickup")]
+        [ActionName("OrderPickupPost")]
         public async Task<IActionResult> OrderPickupPost(int orderId)
         {
             OrderHeader oh = await _db.OrderHeader.FindAsync(orderId);
             oh.Status = SD.StatusCompleted;
             await _db.SaveChangesAsync();
-
             return RedirectToAction("OrderPickup", "Order");
         }
     }
