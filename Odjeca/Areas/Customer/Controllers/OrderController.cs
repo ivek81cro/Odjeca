@@ -200,7 +200,7 @@ namespace Odjeca.Areas.Customer.Controllers
                 if (searchName != null)
                 {
                     orderHeaderList = await _db.OrderHeader.Include(o => o.ApplicationUser)
-                                                   .Where(u => u.PickupName.ToLower().Contains(searchName.ToLower()))
+                                                   .Where(u => u.PickupName.ToLower().Contains(searchName.ToLower()) && u.Status == SD.StatusReady)
                                                    .OrderByDescending(o => o.OrderDate).ToListAsync();
                 }
                 else
@@ -209,7 +209,7 @@ namespace Odjeca.Areas.Customer.Controllers
                     {
                         user = await _db.ApplicationUser.Where(u => u.Email.ToLower().Contains(searchEmail.ToLower())).FirstOrDefaultAsync();
                         orderHeaderList = await _db.OrderHeader.Include(o => o.ApplicationUser)
-                                                    .Where(o => o.UserId == user.Id)
+                                                    .Where(o => o.UserId == user.Id && o.Status == SD.StatusReady)
                                                     .OrderByDescending(o => o.OrderDate).ToListAsync();
                     }
                     else
@@ -217,7 +217,7 @@ namespace Odjeca.Areas.Customer.Controllers
                         if (searchPhone != null)
                         {
                             orderHeaderList = await _db.OrderHeader.Include(o => o.ApplicationUser)
-                                                        .Where(u => u.PhoneNumber.Contains(searchPhone))
+                                                        .Where(u => u.PhoneNumber.Contains(searchPhone) && u.Status == SD.StatusReady)
                                                         .OrderByDescending(o => o.OrderDate).ToListAsync();
                         }
                     }
@@ -257,7 +257,6 @@ namespace Odjeca.Areas.Customer.Controllers
 
         [Authorize(Roles = SD.FrontDeskUser + "," + SD.ManagerUser)]
         [HttpPost]
-        [ActionName("OrderPickupPost")]
         public async Task<IActionResult> OrderPickupPost(int orderId)
         {
             OrderHeader oh = await _db.OrderHeader.FindAsync(orderId);
