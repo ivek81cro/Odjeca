@@ -75,6 +75,10 @@ namespace Odjeca.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteUser(string id)
         {
             var user = await _db.Users.FindAsync(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
             _db.Users.Remove(user);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

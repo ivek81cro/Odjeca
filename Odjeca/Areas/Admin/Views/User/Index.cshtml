@@ -63,7 +63,8 @@
                                     }
                                 </td>
                                 <td>
-                                    <a class="btn btn-danger text-white" asp-action="DeleteUser" asp-route-Id="@item.Id">
+                                    <a asp-action="DeleteUser" asp-route-id="@item.Id" onclick="return confirm('Are you sure?')"
+                                            class="btn btn-danger text-white">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </td>
