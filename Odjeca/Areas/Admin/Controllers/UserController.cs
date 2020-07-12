@@ -71,5 +71,13 @@ namespace Odjeca.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await _db.Users.FindAsync(id);
+            _db.Users.Remove(user);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
