@@ -5,13 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container mt-3">
-
-    <h4>Brands - Edit</h4>
+<div class="container mt-3 backgroundWhite rounded">
+    <br />
+    <h2>Brands Edit</h2>
     <hr />
     <form asp-action="Edit" method="post" enctype="multipart/form-data">
-        <div class=" row backgroundWhiteBorder">
-            <div class="col-12">
+        <div class=" row form-group">
+            <div class="col-12 col-sm-5 offset-2">
                 @{
                     var base64 = Convert.ToBase64String(Model.Image);
                     var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
