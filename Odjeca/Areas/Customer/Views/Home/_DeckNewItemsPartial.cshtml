@@ -10,8 +10,8 @@
 <div class="card-deck pb-3 pt-3 m-0 p-0 mt-1 ml-5 mr-5">
     @for (int i = 0; i < 5; ++i)
     {
-        <div class="card col-12 col-sm-5 col-md-3 mt-2" style="min-width:200px;">
-            <img class="card-img-top img-thumbnail m-auto" style="max-width: 9rem;" src="@item.ToList()[i].Image" alt="Card image cap">
+        <div class="card col-12 col-sm-5 col-md-3 mt-2 cardCustom">
+            <img class="card-img-top img-thumbnail m-auto cardCustomImage" src="@item.ToList()[i].Image" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@item.ToList()[i].Name</h5>
                 @{

@@ -32,7 +32,7 @@
                                         <h4><small>@item.StoreItem.Description</small></h4>
                                     </div>
                                     <div class="col-12 text-sm-center col-lg-5 text-lg-right row">
-                                        <div class="col-4 text-md-right" style="padding-top:5px;">
+                                        <div class="col-4 text-md-right pt-2">
                                             <h6><strong>$@item.StoreItem.Price <span class="text-muted">x</span> @item.Count </strong></h6>
                                         </div>
                                         <div class="col-6 col-sm-4 col-lg-6">
@@ -63,11 +63,11 @@
                                         <div class="col-7">
                                             <input asp-for="@Model.OrderHeader.CouponCode" id="txtCouponCode" class="form-control" placeholder="coupon code..." />
                                         </div>
-                                        <div class="col-5" style="margin-top:2px;">
+                                        <div class="col-5 mt-2">
                                             <button type="submit" class="btn btn-sm form-control btn-outline-success" id="btnCoupon" asp-action="AddCoupon">
                                                 Apply
                                             </button>
-                                            <button type="submit" class="btn btn-sm form-control btn-outline-danger" style="display:none" id="btnRemoveCoupon" asp-action="RemoveCoupon">
+                                            <button type="submit" class="btn btn-sm form-control btn-outline-danger" id="btnRemoveCoupon" asp-action="RemoveCoupon">
                                                 Remove
                                             </button>
                                         </div>
