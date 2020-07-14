@@ -1,4 +1,7 @@
 ﻿@model Odjeca.Models.ViewModels.OrderDetatilsCart
+@using Microsoft.Extensions.Options
+
+@inject IOptions<Odjeca.Utility.StripeSettings> Stripe
 
 @{
     ViewData["Title"] = "Index";
@@ -113,6 +116,22 @@
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col-12 col-md-4 offset-md-8">
+
+                                    @{
+                                        var orderTotalForStripe = Model.OrderHeader.OrderTotal * 100;
+
+                                    }
+                                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                            data-key="@Stripe.Value.PublishableKey"
+                                            data-amount="@orderTotalForStripe"
+                                            data-name="Sports Store"
+                                            data-label="Place Order"
+                                            data-description="Sample Charge"
+                                            data-locale="auto"
+                                            data-allow-remember-me="false"
+                                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                            >
+                                    </script>
                                     <button type="submit" id="btnPlaceOrder" onclick="return validateInput()" value="Place Order" class="btn btn-success form-control">Place Order</button>
                                 </div>
                             </div>

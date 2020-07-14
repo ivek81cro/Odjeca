@@ -215,3 +215,7 @@ body {
 .tableButton {
     width: 150px;
 }
+
+.stripe-button-el{
+    display:none !important;
+}

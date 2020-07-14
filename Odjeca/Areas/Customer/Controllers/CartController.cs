@@ -11,6 +11,7 @@ using Odjeca.Data;
 using Odjeca.Models;
 using Odjeca.Models.ViewModels;
 using Odjeca.Utility;
+using Stripe;
 
 namespace Odjeca.Areas.Customer.Controllers
 {
@@ -114,7 +115,7 @@ namespace Odjeca.Areas.Customer.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Summary")]
-        public async Task<IActionResult> SummaryPost()
+        public async Task<IActionResult> SummaryPost(string stripeToken)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -125,7 +126,7 @@ namespace Odjeca.Areas.Customer.Controllers
             DetailCart.OrderHeader.PaymentStatus = SD.PaymentStatusPending;
             DetailCart.OrderHeader.OrderDate = DateTime.Now;
             DetailCart.OrderHeader.UserId = claim.Value;
-            DetailCart.OrderHeader.Status = SD.StatusSubmitted;
+            DetailCart.OrderHeader.Status = SD.PaymentStatusPending;
             DetailCart.OrderHeader.PickUpTime = Convert.ToDateTime(DetailCart.OrderHeader.PickUpDate.ToShortDateString() + " " + DetailCart.OrderHeader.PickUpTime.ToShortTimeString());
 
             List<OrderDetails> orderDetailsList = new List<OrderDetails>();
@@ -166,6 +167,37 @@ namespace Odjeca.Areas.Customer.Controllers
 
             _db.ShoppingCart.RemoveRange(DetailCart.listCart);
             HttpContext.Session.SetInt32(SD.ssShoppingCartCount, 0);
+            await _db.SaveChangesAsync();
+
+            var options = new ChargeCreateOptions
+            {
+                Amount = Convert.ToInt32(DetailCart.OrderHeader.OrderTotal * 100),
+                Currency = "usd",
+                Description = "Order ID : " + DetailCart.OrderHeader.Id,
+                Source = stripeToken
+            };
+            var service = new ChargeService();
+            Charge charge = service.Create(options);
+
+            if(charge.BalanceTransactionId == null)
+            {
+                DetailCart.OrderHeader.Status = SD.PaymentStatusRejected;
+            }
+            else
+            {
+                DetailCart.OrderHeader.TransactionId = charge.BalanceTransactionId;
+            }
+
+            if(charge.Status.ToLower() == "succeeded")
+            {
+                DetailCart.OrderHeader.PaymentStatus = SD.PaymentStatusApproved;
+                DetailCart.OrderHeader.Status = SD.StatusSubmitted;
+            }
+            else
+            {
+                DetailCart.OrderHeader.Status = SD.PaymentStatusRejected;
+            }
+
             await _db.SaveChangesAsync();
 
             //return RedirectToAction("Index", "Home");
