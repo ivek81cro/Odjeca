@@ -219,3 +219,7 @@ body {
 .stripe-button-el{
     display:none !important;
 }
+
+.identity-container{
+    min-height:700px;
+}

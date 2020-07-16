@@ -1,0 +1,17 @@
+﻿<li class="nav-item dropdown text-white-50">
+    <a class="nav-link dropdown-toggle text-light" href"#" id="navbarDropDownMenuLink" role="button" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        Content Management
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+        <a class="dropdown-item" asp-action="Index" asp-controller="Category" asp-area="Admin">Category</a>
+        <a class="dropdown-item" asp-action="Index" asp-controller="SubCategory" asp-area="Admin">Sub Category</a>
+        <a class="dropdown-item" asp-action="Index" asp-controller="StoreItem" asp-area="Admin">Store Item</a>
+        <a class="dropdown-item" asp-action="Index" asp-controller="Discount" asp-area="Admin">Discounts</a>
+        <a class="dropdown-item" asp-action="Index" asp-controller="User" asp-area="Admin">Users</a>
+        <a class="dropdown-item" asp-action="Index" asp-controller="Brands" asp-area="Admin">Brands</a>
+        <hr />
+        <a class="dropdown-item" asp-action="ManageOrder" asp-controller="Order" asp-area="Customer">Manage Order</a>
+        <a class="dropdown-item" asp-action="OrderPickup" asp-controller="Order" asp-area="Customer">Order Pickup</a>
+    </div>
+</li>
