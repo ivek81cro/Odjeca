@@ -1,4 +1,4 @@
-Seminarski projekt PIN
+Seminarski projekt
 # Odjeca
 MVC projekt</br>
 Kratak opis:</br>
