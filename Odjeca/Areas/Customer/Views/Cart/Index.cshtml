@@ -3,105 +3,109 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <form method="post">
-        @if (Model.listCart.Count > 0)
-        {
-            <br />
-            <input id="userId" asp-for="@Model.listCart[0].ApplicationUserId" hidden />
-            <div class="backgroundWhiteBorder">
-                <div class="container">
-                    <div class="card">
-                        <div class="card-header bg-dark text-light ml-0 row container">
-                            <div class="col-6">
-                                <i class="fa fa-shopping-cart"></i> &nbsp;
-                                Shopping Cart
-                            </div>
-                            <div class="col-6 text-right">
-                                <a asp-area="Customer" asp-controller="Store" asp-action="Index" class="btn btn-outline-info btn-sm">Continue Shopping</a>
-                            </div>
+<form method="post">
+    @if (Model.listCart.Count > 0)
+    {
+        <br />
+        <input id="userId" asp-for="@Model.listCart[0].ApplicationUserId" hidden />
+        <div class="backgroundWhiteBorder">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header bg-dark text-light ml-0 row container">
+                        <div class="col-6">
+                            <i class="fa fa-shopping-cart"></i> &nbsp;
+                            Shopping Cart
                         </div>
-                        <div class="card-body">
-                            @foreach (var item in Model.listCart)
-                            {
-                                <div class="row">
-                                    <div class="d-none d-lg-block col-lg-2 text-center py-2">
-                                        <img src="@item.StoreItem.Image" class="rounded img-fluid" />
-                                    </div>
-                                    <div class="col-12 text-sm-center col-lg-5 text-lg-left">
-                                        <h4><strong>@item.StoreItem.Name</strong></h4>
-                                        <h4><small>@item.StoreItem.Description</small></h4>
-                                    </div>
-                                    <div class="col-12 text-sm-center col-lg-5 text-lg-right row">
-                                        <div class="col-4 text-md-right pt-2">
-                                            <h6><strong>$@item.StoreItem.Price <span class="text-muted">x</span> @item.Count </strong></h6>
-                                        </div>
-                                        <div class="col-6 col-sm-4 col-lg-6">
-                                            <div class="float-right mx-1">
-                                                <button type="submit" class="btn btn-primary" asp-action="plus" asp-route-cartId="@item.Id">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </div>
-                                            <div class="float-right mx-1">
-                                                <button type="submit" class="btn btn-danger" asp-action="minus" asp-route-cartId="@item.Id">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="col-2 col-sm-4 col-lg-2 text-right">
-                                            <button type="submit" class="btn btn-outline-danger" asp-action="remove" asp-route-cartId="@item.Id">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr />
-                            }
-
+                        <div class="col-6 text-right">
+                            <a asp-area="Customer" asp-controller="Store" asp-action="Index" class="btn btn-outline-info btn-sm">Continue Shopping</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var item in Model.listCart)
+                        {
                             <div class="row">
-                                <div class="col-12 col-md-5">
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <input asp-for="@Model.OrderHeader.CouponCode" id="txtCouponCode" class="form-control" placeholder="coupon code..." />
-                                        </div>
-                                        <div class="col-5 mt-2">
-                                            <button type="submit" class="btn btn-sm form-control btn-outline-success" id="btnCoupon" asp-action="AddCoupon">
-                                                Apply
+                                <div class="d-none d-lg-block col-lg-2 text-center py-2">
+                                    <img src="@item.StoreItem.Image" class="rounded img-fluid" />
+                                </div>
+                                <div class="col-12 text-sm-center col-lg-5 text-lg-left">
+                                    <h4><strong>@item.StoreItem.Name</strong></h4>
+                                    <h4><small>@item.StoreItem.Description</small></h4>
+                                </div>
+                                <div class="col-12 text-sm-center col-lg-5 text-lg-right row">
+                                    <div class="col-4 text-md-right pt-2">
+                                        <h6><strong>$@item.StoreItem.Price <span class="text-muted">x</span> @item.Count </strong></h6>
+                                    </div>
+                                    <div class="col-6 col-sm-4 col-lg-6">
+                                        <div class="float-right mx-1">
+                                            <button type="submit" class="btn btn-primary" asp-action="plus" asp-route-cartId="@item.Id">
+                                                <i class="fas fa-plus"></i>
                                             </button>
-                                            <button type="submit" class="btn btn-sm form-control btn-outline-danger" id="btnRemoveCoupon" asp-action="RemoveCoupon">
-                                                Remove
+                                        </div>
+                                        <div class="float-right mx-1">
+                                            <button type="submit" class="btn btn-danger" asp-action="minus" asp-route-cartId="@item.Id">
+                                                <i class="fas fa-minus"></i>
                                             </button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12 col-md-6 offset-md-1 col-lg-4 offset-lg-3 pr-4">
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between bg-light">
-                                            <span class="text-info"> Total (USD)</span>
-                                            <strong class="text-info">$ <span id="txtOrderTotal">@Model.OrderHeader.OrderTotal</span></strong>
-                                        </li>
-                                    </ul>
+                                    <div class="col-2 col-sm-4 col-lg-2 text-right">
+                                        <button type="submit" class="btn btn-outline-danger" asp-action="remove" asp-route-cartId="@item.Id">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
+                            <hr />
+                        }
 
-
+                        <div class="row">
+                            <div class="col-12 col-md-5">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <input asp-for="@Model.OrderHeader.CouponCode" id="txtCouponCode" class="form-control" placeholder="coupon code..." />
+                                    </div>
+                                    <div class="col-5 mt-2">
+                                        <button type="submit" class="btn btn-sm form-control btn-outline-success" id="btnCoupon" asp-action="AddCoupon">
+                                            Apply
+                                        </button>
+                                        <button type="submit" class="btn btn-sm form-control btn-outline-danger" id="btnRemoveCoupon" asp-action="RemoveCoupon">
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 offset-md-1 col-lg-4 offset-lg-3 pr-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between bg-light">
+                                        <span class="text-info"> Total (USD)</span>
+                                        <strong class="text-info">$ <span id="txtOrderTotal">@Model.OrderHeader.OrderTotal</span></strong>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            <div class="col-12 col-lg-4 offset-lg-8 col-md-6 offset-md-6">
-                                <a asp-action="Summary" asp-area="Customer" asp-controller="Cart" class="btn btn-success form-control">Summary</a>
-                            </div>
+
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="col-12 col-lg-4 offset-lg-8 col-md-6 offset-md-6">
+                            <a asp-action="Summary" asp-area="Customer" asp-controller="Cart" class="btn btn-success form-control">Summary</a>
                         </div>
                     </div>
                 </div>
             </div>
-        }
-        else
-        {
-            <div class="backgroundWhiteBorder mt-4"> No items added to the shopping cart...</div>
+        </div>
+    }
+    else
+    {
+        <div class="container backgroundWhiteBorder mt-4">
+            <div class="mt-4">
+                <h3>Shopping Cart</h3><p>No items added to the shopping cart...</p>
+            </div>
             <div class="col-4 text-right mb-4">
                 <a asp-action="Index" asp-controller="Store" class="btn btn-success form-control">New Order</a>
             </div>
-        }
-    </form>
+        </div>
+    }
+</form>
 
 @section Scripts{
     <script>
