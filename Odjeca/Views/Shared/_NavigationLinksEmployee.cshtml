@@ -5,7 +5,7 @@
        aria-haspopup="true" aria-expanded="false">
         Order Management
     </a>
-    <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+    <div class="dropdown-menu bg-dark manage-dropdown" aria-labelledby="navbarDropDownMenuLink">
         @if (User.IsInRole(SD.StorageUser) || User.IsInRole(SD.ManagerUser))
         {
             <a class="dropdown-item" asp-action="ManageOrder" asp-controller="Order" asp-area="Customer">Manage Order</a>

@@ -223,3 +223,13 @@ body {
 .identity-container{
     min-height:700px;
 }
+
+.manage-dropdown a {
+    color: #ffffff;
+    background-color: #343a40;
+}
+
+.manage-dropdown a:hover {
+    color: #bbb9b9;
+    background-color: #343a40;
+}
