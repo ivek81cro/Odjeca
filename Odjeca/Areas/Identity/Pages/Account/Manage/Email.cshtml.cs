@@ -91,12 +91,12 @@ namespace Odjeca.Areas.Identity.Pages.Account.Manage
             var email = await _userManager.GetEmailAsync(user);
             if (Input.NewEmail != email)
             {
-                var userId = await _userManager.GetUserIdAsync(user);
-                var code = await _userManager.GenerateChangeEmailTokenAsync(user, Input.NewEmail);
+                var userId_ = await _userManager.GetUserIdAsync(user);
+                var code_ = await _userManager.GenerateChangeEmailTokenAsync(user, Input.NewEmail);
                 var callbackUrl = Url.Page(
                     "/Account/ConfirmEmailChange",
                     pageHandler: null,
-                    values: new { userId = userId, email = Input.NewEmail, code = code },
+                    values: new { userId = userId_, email = Input.NewEmail, code = code_ },
                     protocol: Request.Scheme);
                 await _emailSender.SendEmailAsync(
                     Input.NewEmail,
@@ -125,14 +125,14 @@ namespace Odjeca.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var userId = await _userManager.GetUserIdAsync(user);
+            var userId_ = await _userManager.GetUserIdAsync(user);
             var email = await _userManager.GetEmailAsync(user);
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+            var code_ = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            code_ = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code_));
             var callbackUrl = Url.Page(
                 "/Account/ConfirmEmail",
                 pageHandler: null,
-                values: new { area = "Identity", userId = userId, code = code },
+                values: new { area = "Identity", userId = userId_, code = code_ },
                 protocol: Request.Scheme);
             await _emailSender.SendEmailAsync(
                 email,
