@@ -76,7 +76,11 @@
 
                     </div>
                     <div class="col-md-4">
-                        <a asp-action="Index" class="btn btn-success form-control">Back To Store</a>
+                        @*
+                            Use if Item details is not modal window
+                            <a asp-action="Index" class="btn btn-success form-control">Back To Store</a>
+                        *@
+                        <a class="btn btn-success form-control close-button" data-dismiss="modal">Back To Store</a>
                     </div>
                     @if (SignInManager.IsSignedIn(User))
                     {
