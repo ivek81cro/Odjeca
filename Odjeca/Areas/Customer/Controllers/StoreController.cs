@@ -43,7 +43,7 @@ namespace Odjeca.Areas.Customer.Controllers
             return View(StoreVM);
         }
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> DetailsModal(int id)
         {
             var storeItemfromDb = await _db.StoreItem.Include(m => m.Category).Include(m => m.SubCategory).Where(m => m.Id == id).FirstOrDefaultAsync();
 

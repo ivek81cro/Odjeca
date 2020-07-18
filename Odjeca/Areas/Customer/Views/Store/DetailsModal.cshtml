@@ -1,14 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @model ShoppingCart
-@using Odjeca.Extensions
-@{
-    ViewData["Title"] = "Item details";
-}
 
 <div class="container backgroundWhite mt-4">
     <h2 class="text-info">Item Details</h2>
-    <form method="post">
+    <form asp-action="Details" asp-controller="Store" asp-route-OrderId="@Model" method="post">
         <div class="border rounded row pt-2">
             <div class="col-12 d-md-none">
                 <img src="@Model.StoreItem.Image" class="img-fluid img-thumbnail border rounded" />
@@ -99,4 +95,10 @@
     </form>
 </div>
 
-@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@section Scripts{
+    <script>
+        $(".footer-custom").hide();
+        $(".bottom-custom").hide();
+    </script>
+}
+
