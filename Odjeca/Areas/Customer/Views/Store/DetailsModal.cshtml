@@ -2,6 +2,11 @@
 @inject SignInManager<IdentityUser> SignInManager
 @model ShoppingCart
 
+@{
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+}
+
+
 <div class="container backgroundWhite mt-4">
     <h2 class="text-info">Item Details</h2>
     <form asp-action="Details" asp-controller="Store" asp-route-OrderId="@Model" method="post">
@@ -80,7 +85,7 @@
                             Use if Item details is not modal window
                             <a asp-action="Index" class="btn btn-success form-control">Back To Store</a>
                         *@
-                        <a class="btn btn-success form-control close-button" data-dismiss="modal">Back To Store</a>
+                        <a class="btn btn-success form-control close-button text-light" data-dismiss="modal">Back To Store</a>
                     </div>
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -98,11 +103,3 @@
         <input asp-for="StoreItemId" hidden />
     </form>
 </div>
-
-@section Scripts{
-    <script>
-        $(".footer-custom").hide();
-        $(".bottom-custom").hide();
-    </script>
-}
-
