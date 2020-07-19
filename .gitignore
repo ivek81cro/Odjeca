@@ -343,3 +343,5 @@ ASALocalRun/
 healthchecksdb
 *.psd
 *.bacpac
+
+appsettings.json
