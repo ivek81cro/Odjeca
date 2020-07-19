@@ -233,3 +233,7 @@ body {
     color: #bbb9b9;
     background-color: #343a40;
 }
+
+.card-description{
+    min-height:5em;
+}

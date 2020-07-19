@@ -16,6 +16,8 @@ using Odjeca.Utility;
 using Stripe;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Globalization;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Odjeca.Services;
 
 namespace Odjeca
 {
@@ -38,6 +40,17 @@ namespace Odjeca
                 .AddDefaultTokenProviders()
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+            services.AddTransient<IEmailSender, EmailSender>(i =>
+                new EmailSender(
+                        Configuration["EmailSender:Host"],
+                        Configuration.GetValue<int>("EmailSender:Port"),
+                        Configuration.GetValue<bool>("EmailSender:EnableSSL"),
+                        Configuration["EmailSender:UserName"],
+                        Configuration["EmailSender:Password"]
+                    )
+            );
 
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             services.AddControllersWithViews();
