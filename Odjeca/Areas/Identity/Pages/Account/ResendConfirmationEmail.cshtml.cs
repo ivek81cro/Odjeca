@@ -61,7 +61,7 @@ namespace Odjeca.Areas.Identity.Pages.Account
                     return RedirectToPage("./RegisterConfirmation", new { email = Input.Email });
                 }
             }
-            return Redirect("~/Customer/Home/");
+            return RedirectToPage("./Login");
         }
     }
 }
