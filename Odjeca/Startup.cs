@@ -12,6 +12,8 @@ using Stripe;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Odjeca.Services;
+using Microsoft.AspNetCore.HttpOverrides;
+using System.Net;
 
 namespace Odjeca
 {
@@ -46,6 +48,11 @@ namespace Odjeca
             );
 
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
+            services.Configure<ForwardedHeadersOptions>(opt =>
+            {
+                opt.KnownProxies.Add(IPAddress.Parse("194.36.45.34"));
+            });
 
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -82,6 +89,12 @@ namespace Odjeca
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
             StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
             app.UseHttpsRedirection();
             app.UseStaticFiles();
