@@ -1,12 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Odjeca.Data;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Odjeca.Utility;
 using Stripe;
-using Microsoft.AspNetCore.HttpOverrides;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Odjeca.Services;
@@ -41,7 +35,6 @@ namespace Odjeca
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
             services.AddTransient<IEmailSender, EmailSender>(i =>
                 new EmailSender(
                         Configuration["EmailSender:Host"],
@@ -53,8 +46,11 @@ namespace Odjeca
             );
 
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
+
+            services.Configure<DataProtectionTokenProviderOptions>(o => o.TokenLifespan = TimeSpan.FromMinutes(30));
 
             services.ConfigureApplicationCookie(options =>
             {
