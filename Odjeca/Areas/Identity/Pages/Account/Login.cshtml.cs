@@ -94,6 +94,7 @@ namespace Odjeca.Areas.Identity.Pages.Account
 
                     if (!confirmed)
                     {
+                        await _signInManager.SignOutAsync();
                         return RedirectToPage("./ResendConfirmationEmail");
                     }
 
