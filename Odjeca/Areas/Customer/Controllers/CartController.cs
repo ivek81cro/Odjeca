@@ -5,6 +5,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Odjeca.Data;
@@ -19,13 +21,17 @@ namespace Odjeca.Areas.Customer.Controllers
     public class CartController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly IEmailSender _emailSender;
+        private UserManager<IdentityUser> _userManager;
 
         [BindProperty]
         public OrderDetatilsCart DetailCart { get; set; }
 
-        public CartController(ApplicationDbContext db)
+        public CartController(ApplicationDbContext db, IEmailSender emailSender, UserManager<IdentityUser> userManager)
         {
             _db = db;
+            _emailSender = emailSender;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -120,21 +126,20 @@ namespace Odjeca.Areas.Customer.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-
             DetailCart.listCart = await _db.ShoppingCart.Where(c => c.ApplicationUserId == claim.Value).ToListAsync();
 
             DetailCart.OrderHeader.PaymentStatus = SD.PaymentStatusPending;
             DetailCart.OrderHeader.OrderDate = DateTime.Now;
             DetailCart.OrderHeader.UserId = claim.Value;
             DetailCart.OrderHeader.Status = SD.PaymentStatusPending;
-            DetailCart.OrderHeader.PickUpTime = Convert.ToDateTime(DetailCart.OrderHeader.PickUpDate.ToShortDateString() + " " + DetailCart.OrderHeader.PickUpTime.ToShortTimeString());
+            DetailCart.OrderHeader.PickUpTime = Convert.ToDateTime(DetailCart.OrderHeader.PickUpDate.ToShortDateString() + 
+                " " + DetailCart.OrderHeader.PickUpTime.ToShortTimeString());
 
             List<OrderDetails> orderDetailsList = new List<OrderDetails>();
             _db.OrderHeader.Add(DetailCart.OrderHeader);
             await _db.SaveChangesAsync();
 
             DetailCart.OrderHeader.OrderTotalOriginal = 0;
-
 
             foreach (var item in DetailCart.listCart)
             {
@@ -192,6 +197,17 @@ namespace Odjeca.Areas.Customer.Controllers
             {
                 DetailCart.OrderHeader.PaymentStatus = SD.PaymentStatusApproved;
                 DetailCart.OrderHeader.Status = SD.StatusSubmitted;
+
+                var user = await _userManager.GetUserAsync(User);
+                //TODO: format mail to look nicer
+                string details = $"<h2>Order number {DetailCart.OrderHeader.Id} details</h2>";
+
+                foreach(var item in DetailCart.listCart)
+                {
+                    details = details + ($"<p>{item.StoreItem.Name} {item.StoreItem.Price}$</p>");
+                }
+
+                await _emailSender.SendEmailAsync(user.Email, $"Order details from SportStore", details);
             }
             else
             {
