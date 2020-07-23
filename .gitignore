@@ -345,3 +345,4 @@ healthchecksdb
 *.bacpac
 
 appsettings.json
+/Odjeca/appsettings.Development.json

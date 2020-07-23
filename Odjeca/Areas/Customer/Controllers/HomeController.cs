@@ -1,28 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Odjeca.Data;
+using Odjeca.Models;
+using Odjeca.Models.ViewModels;
+using Odjeca.Services;
+using Odjeca.Utility;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Odjeca.Data;
-using Odjeca.Models;
-using Odjeca.Models.ViewModels;
-using Odjeca.Utility;
 
 namespace Odjeca.Controllers
 {
     [Area("Customer")]
+    [AllowAnonymous]
     public class HomeController : Controller
     {
+        private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _db;
-        public HomeController(ApplicationDbContext db)
+        public HomeController(ApplicationDbContext db, IEmailSender emailSender)
         {
             _db = db;
+            _emailSender = emailSender;
         }
         public async Task<IActionResult> Index()
         {
@@ -66,10 +69,6 @@ namespace Odjeca.Controllers
         {
             return View();
         }
-        public IActionResult Contact()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -77,6 +76,19 @@ namespace Odjeca.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        
+        public async Task<IActionResult> Contact(ContactFormModel item)
+        {            
+            if (ModelState.IsValid)
+            {
+                await _emailSender.SendEmailAsync("info@elabdesign.net", 
+                    "Message from contact form", 
+                    $"<h3>Name: {item.Name}</h3><a href='{item.Email}'>Mail: {item.Email}</a><p>Message: {item.Message}</p>");
+                return View("ContactSuccess");
+            }
+            else
+            {
+                return View("Contact");
+            }
+        }
     }
 }
