@@ -199,13 +199,23 @@ namespace Odjeca.Areas.Customer.Controllers
                 DetailCart.OrderHeader.Status = SD.StatusSubmitted;
 
                 var user = await _userManager.GetUserAsync(User);
-                //TODO: format mail to look nicer
-                string details = $"<h2>Order number {DetailCart.OrderHeader.Id} details</h2>";
-
+                string details = $"<h2>Order number {DetailCart.OrderHeader.Id} details</h2>" +
+                    ("_________________________________________________________________________________________") + 
+                    "<h3>Order detils:</h3>" + 
+                    ("_________________________________________________________________________________________") +
+                    ("<table border='0' cellpadding='5' cellspacing='5'>") +
+                    ("<tr><th>No.</th><th>Name</th><th>Pcs.</th><th>Price</th></tr>");
+                int i = 1;
                 foreach(var item in DetailCart.listCart)
                 {
-                    details = details + ($"<p>{item.StoreItem.Name} {item.StoreItem.Price}$</p>");
+                    details = details + ($"<tr><td>{i}.</td><td>{item.StoreItem.Name}</td><td>{item.Count}</td><td>{item.StoreItem.Price}$</td></tr>");
+                    i++;
                 }
+                details = details + ("</table>") + 
+                    ("_________________________________________________________________________________________") + 
+                    ($"<p><strong>Order total: {DetailCart.OrderHeader.OrderTotal}$</strong></p>") +
+                    ($"<p>Payment status: {DetailCart.OrderHeader.PaymentStatus}</p><br />") +
+                    ($"<p>You can review order details your account, order history section.</p>");
 
                 await _emailSender.SendEmailAsync(user.Email, $"Order details from SportStore", details);
             }
