@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 namespace Odjeca.Controllers
 {
     [Area("Customer")]
-    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly IEmailSender _emailSender;
@@ -70,12 +69,19 @@ namespace Odjeca.Controllers
             return View();
         }
 
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Contact(ContactFormModel item)
         {            
             if (ModelState.IsValid)
