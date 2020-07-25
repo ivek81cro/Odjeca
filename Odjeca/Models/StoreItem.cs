@@ -13,25 +13,29 @@ namespace Odjeca.Models
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
+
+        [Display(Name = "Brand")]
         public string Manufacturer { get; set; }
 
         public string Image { get; set; }
-        
-        [Display(Name ="Category")]
+
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
-        
+
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
-        [Display(Name="SubCategory")]
+        [Display(Name = "Sub Category")]
         public int SubCategoryId { get; set; }
 
         [ForeignKey("SubCategoryId")]
         public virtual SubCategory SubCategory { get; set; }
 
-        [Range(0.01, int.MaxValue, ErrorMessage ="Price should be greater than 0.01$")]
+        [Display(Name = "Price $")]
+        [Range(0.01, int.MaxValue, ErrorMessage = "Price should be greater than 0.01$")]
         public double Price { get; set; }
 
+        [Display(Name = "Arrival Date")]
         public DateTime ArrivalDate { get; set; }
     }
 }
