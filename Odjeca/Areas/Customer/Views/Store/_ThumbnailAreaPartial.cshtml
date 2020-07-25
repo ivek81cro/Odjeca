@@ -15,23 +15,23 @@
         {
             <div class="border col-12 mt-2 p-2">
                 <div class="row">
-                    <div class="col-md-2 col-sm-12">
+                    <div class="col-xl-3 col-lg-4 col-sm-12">
                         <img class="img-fluid img-thumbnail zoom" src="@item.Image" />
                     </div>
-                    <div class="col-md-10 col-sm-12">
+                    <div class="col-xl-9 col-lg-8 col-12">
                         <div class="row pr-3">
                             <div class="col-8">
                                 <label class="text-primary text-primary-neinline">@item.Name | </label>
                                 <label class="text-primary text-primary-neinline">Brand: @item.Manufacturer</label>
                             </div>
-                            <div class="col-4 text-right itemPrice">
-                                <h4>$@item.Price</h4>
-                            </div>
                         </div>
                         <div class="row col-12 text-justify d-none d-md-block">
                             <p class="detailsText">@Html.Raw(item.Description)</p>
                         </div>
-                        <div class="col-lg-3 col-md-12 text-center">
+                        <div class="row col-12 text-right itemPrice">
+                            <p>Price: $@item.Price</p>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-5 col-12 text-center">
                             <button type="submit" class="btn btn-success anchorDetail form-control" data-id="@item.Id" data-toggle="modal">
                                 <i class="far fa-list-alt"></i> Details
                             </button>

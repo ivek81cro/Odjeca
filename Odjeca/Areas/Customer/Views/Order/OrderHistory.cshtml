@@ -62,15 +62,23 @@
                                     @Html.DisplayFor(m => item.OrderDetails.Count)
                                 </td>
                                 <td>
-                                    <button type="submit" class="btn btn-success anchorDetail" data-id="@item.OrderHeader.Id" data-toggle="modal">
-                                        <i class="far fa-list-alt"></i> Details
-                                    </button>
-                                    @if (item.OrderHeader.Status != SD.StatusCancelled)
-                                    {
-                                        <button type="submit" class="btn btn-info orderStatus" data-id="@item.OrderHeader.Id" data-toggle="modal">
-                                            <i class="far fa-clock-o"></i> Status
+                                    <div class="row">
+                                        <button type="submit" class="btn btn-success ml-1 anchorDetail" data-id="@item.OrderHeader.Id" data-toggle="modal">
+                                            <i class="far fa-list-alt"></i> Details
                                         </button>
-                                    }
+                                        @if (item.OrderHeader.Status != SD.StatusCancelled)
+                                        {
+                                            <button type="submit" class="btn btn-info ml-1 orderStatus" data-id="@item.OrderHeader.Id" data-toggle="modal">
+                                                <i class="fa fa-clock-o"></i> Status
+                                            </button>
+                                        }
+                                        @if (item.OrderHeader.Status == SD.StatusCancelled)
+                                        {
+                                            <button type="submit" class="btn btn-danger ml-1" disabled>
+                                                Canceled
+                                            </button>
+                                        }
+                                    </div>
                                 </td>
                             </tr>
                         }

@@ -191,6 +191,7 @@ body {
 
 .itemPrice {
     color: maroon;
+    font-size:1.2em;
 }
 
 .borderRoundCustom {
@@ -239,7 +240,7 @@ body {
 }
 
 .zoom {
-    transform: scale(0.75);
+    max-width:200px;
 }
 
 .zoom:hover {
