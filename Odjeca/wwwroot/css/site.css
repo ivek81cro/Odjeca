@@ -2,81 +2,83 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-  padding-top:60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    padding-top: 60px;
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 
-.search-background{
-    background:url('/images/background.png');
+.search-background {
+    background: url('/images/background.png');
 }
 
-.backgroundWhite{
+.backgroundWhite {
     background-color: white;
     padding: 30px;
     border-radius: 10px;
@@ -99,11 +101,11 @@ body {
 }
 
 .detailsText {
-    overflow: hidden; text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
-
 }
 
 .item-filter-list li {
@@ -121,10 +123,10 @@ body {
     font-family: "Poppins",sans-serif;
 }
 
-.item-filter-list li.is-checke, .item-filter-list li:hover {
-    background-color: #545b62;
-    color: #fff;
-}
+    .item-filter-list li.is-checke, .item-filter-list li:hover {
+        background-color: #545b62;
+        color: #fff;
+    }
 
 #item-filter a:hover {
     color: aqua;
@@ -133,7 +135,7 @@ body {
 .border2 {
     border: 5px solid #dee2e6;
     padding: 5px;
-    margin:5px;
+    margin: 5px;
 }
 
 #bottom-links {
@@ -141,17 +143,17 @@ body {
 }
 
 #head-jumbotron {
-    background-image:url("../images/headerback.PNG");
-    background-repeat:no-repeat;
-    background-size:cover;
+    background-image: url("../images/headerback.PNG");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #menu-wrapper {
     border-left: 0px solid black;
 }
 
-#navbar-logo{
-    height:1em;
+#navbar-logo {
+    height: 1em;
 }
 
 #border-top-bottom {
@@ -161,18 +163,17 @@ body {
     margin-bottom: 1%
 }
 
-#footer-custom ul li a{
-    color:dimgray;
-    text-decoration:none;
-}
-
-#footer-custom ul li a:hover {
-    color: lightgray;
+#footer-custom ul li a {
+    color: dimgray;
     text-decoration: none;
 }
 
-#modal-details
-{
+    #footer-custom ul li a:hover {
+        color: lightgray;
+        text-decoration: none;
+    }
+
+#modal-details {
     min-width: 70%;
 }
 
@@ -181,8 +182,8 @@ body {
     color: maroon;
 }
 
-.cardCustom {
-    min-width:200px;
+.card-custom {
+    min-width: 200px;
 }
 
 .cardCustomImage {
@@ -191,7 +192,7 @@ body {
 
 .itemPrice {
     color: maroon;
-    font-size:1.2em;
+    font-size: 1.2em;
 }
 
 .borderRoundCustom {
@@ -200,8 +201,8 @@ body {
 }
 
 .aboutImage {
-    width:30rem; 
-    height:30rem; 
+    width: 30rem;
+    height: 30rem;
     border: 1px solid black;
 }
 
@@ -217,12 +218,12 @@ body {
     width: 150px;
 }
 
-.stripe-button-el{
-    display:none !important;
+.stripe-button-el {
+    display: none !important;
 }
 
-.identity-container{
-    min-height:700px;
+.identity-container {
+    min-height: 700px;
 }
 
 .manage-dropdown a {
@@ -235,12 +236,12 @@ body {
     background-color: #343a40;
 }
 
-.card-description{
-    min-height:5em;
+.card-description {
+    min-height: 5em;
 }
 
 .zoom {
-    max-width:200px;
+    max-width: 200px;
 }
 
 .zoom:hover {
