@@ -1,6 +1,6 @@
 Seminarski projekt
 # Odjeca
-MVC projekt</br>
+ASP.NET Core MVC + SQL projekt</br>
 Kratak opis:</br>
 -web trgovina </br>
 -dodavanje korisničkih prava korisnicima:</br>
